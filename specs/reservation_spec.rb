@@ -35,7 +35,7 @@ describe 'Reservation' do
     it "calculates the total cost of stay correctly" do
       new_reservation = Reservation.new(Date.new(2000,1,10), Date.new(2000,1,15),10)
 
-      new_reservation.total_cost.must_equal 1000
+      new_reservation.total_cost.must_equal 800
     end
   end
 end
