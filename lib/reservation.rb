@@ -1,7 +1,7 @@
 require_relative 'hotel'
 
 class Reservation
-attr_reader :check_in, :check_out, :room_number
+  attr_reader :check_in, :check_out, :room_number
 
   ROOM_RATE_NIGHTLY = 200
 
@@ -20,7 +20,14 @@ attr_reader :check_in, :check_out, :room_number
   end
 
   def total_cost
-    total_cost = (days_reserved - 1) * ROOM_RATE_NIGHTLY
+    total_cost = (days_reserved - 1 ) * ROOM_RATE_NIGHTLY
+    return total_cost
+  end
+
+  def one_night
+    if days_reserved - 1 == 0
+      total_cost = days_reserved * ROOM_RATE_NIGHTLY
+    end
     return total_cost
   end
 

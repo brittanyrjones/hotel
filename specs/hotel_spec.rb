@@ -24,7 +24,7 @@ describe 'hotel class' do
       hotel = Hotel.new
       room_number = hotel.find_available_room
       room_number.must_be :>,0
-      room_number.must_be :<,20
+      room_number.must_be :<=,20
     end
 
     it "can find an available room when reservation dates are overlapping with existing reservation" do
@@ -82,7 +82,22 @@ describe 'hotel class' do
   end
 
   describe 'can get list of reservations' do
-    it "will list all reservations during the time listed" do
+
+    it "will list all reservations during the time given" do
+      hotel = Hotel.new
+
+      new_reservation1 = Reservation.new(Date.new(2018,6,1),Date.new(2018,6,6),1)
+      new_reservation = Reservation.new(Date.new(2018,9,1),Date.new(2018,9,6),1)
+
+      hotel.create_reservation(new_reservation1)
+      hotel.create_reservation(new_reservation)
+      new_res = hotel.list_reservations(Date.new(2018,6,2))
+      new_res.must_be_kind_of Array
+      new_res.length.must_equal 1
+
+    end
+
+    it "will list no reservations during the time given" do
       hotel = Hotel.new
 
       new_reservation1 = Reservation.new(Date.new(2018,6,1),Date.new(2018,6,6),1)
@@ -91,11 +106,9 @@ describe 'hotel class' do
       hotel.create_reservation(new_reservation1)
       hotel.create_reservation(new_reservation)
 
-
-      res = hotel.list_reservations(Date.new(2018,6,2))
-      res.must_be_kind_of Array
-
-      res.length.must_equal 1
+      future_res = hotel.list_reservations(Date.new(2030,10,2))
+      future_res.must_be_kind_of Array
+      future_res.length.must_equal 0
 
     end
   end
