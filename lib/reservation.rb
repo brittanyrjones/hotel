@@ -19,13 +19,12 @@ attr_reader :check_in, :check_out, :room_number
     end
   end
 
-  def days_booked
-    check_out - check_in
-  end
-
   def total_cost
-    total_cost = (days_booked - 1) * ROOM_RATE_NIGHTLY
+    total_cost = (days_reserved - 1) * ROOM_RATE_NIGHTLY
     return total_cost
   end
 
+  def days_reserved
+    check_out - check_in
+  end
 end

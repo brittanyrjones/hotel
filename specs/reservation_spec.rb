@@ -27,7 +27,7 @@ describe 'Reservation' do
     it "calculates days that room is reserved" do
       new_reservation = Reservation.new(Date.new(2000,1,10), Date.new(2000,1,25),2)
 
-      new_reservation.days_booked.must_equal 15
+      new_reservation.days_reserved.must_equal 15
     end
   end
 
